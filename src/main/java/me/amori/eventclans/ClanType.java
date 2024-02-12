@@ -8,7 +8,7 @@ public enum ClanType {
 
     RED(new ArmorTrim(TrimMaterial.REDSTONE, TrimPattern.SENTRY)),
     GREEN(new ArmorTrim(TrimMaterial.EMERALD, TrimPattern.COAST)),
-    BLUE(new ArmorTrim(TrimMaterial.AMETHYST, TrimPattern.WAYFINDER)),
+    BLUE(new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.WAYFINDER)),
     //NEUTRAL(new ArmorTrim(TrimMaterial.GOLD, TrimPattern.DUNE), null),
 
     ADMIN(null)

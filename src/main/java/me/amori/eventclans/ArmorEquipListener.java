@@ -1,17 +1,35 @@
 package me.amori.eventclans;
 
 import com.jeff_media.armorequipevent.ArmorEquipEvent;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ArmorMeta;
 
 public class ArmorEquipListener implements Listener {
 
     @EventHandler
     public void onArmorEquip(ArmorEquipEvent event) {
-        event.getPlayer().sendMessage(event.getType().name());
+        if(event.getNewArmorPiece() == null) {
+            return;
+        }
+
+        if(EventClansPlugin.isTrimmableArmorPiece(event.getNewArmorPiece().getType())) {
+            ClanType clan = EventClansPlugin.getClan(event.getPlayer());
+
+            // Don't handle if clan doesn't have a trim
+            if(!clan.hasTrim()) {
+                return;
+            }
+
+            ArmorMeta meta = (ArmorMeta) event.getNewArmorPiece().getItemMeta();
+            meta.setTrim(clan.getTrim());
+            event.getNewArmorPiece().setItemMeta(meta);
+        }
     }
 
     // For when an armor piece is swapped from the hotbar
@@ -23,6 +41,7 @@ public class ArmorEquipListener implements Listener {
         }
 
         // Don't handle if empty hand
+        Player plr = event.getPlayer();
         ItemStack item = event.getItem();
         if(item == null) {
             return;
@@ -30,7 +49,33 @@ public class ArmorEquipListener implements Listener {
 
         // Handle if this is swapping armor
         if(EventClansPlugin.isTrimmableArmorPiece(item.getType())) {
-            // TODO: check if player is wearing chestplate or helmet based on armor piece in hand
+
+            Material itemType = item.getType();
+            String itemTypeName = itemType.name().toLowerCase();
+            if(itemTypeName.contains("chestplate")) {
+                // Don't handle if not armor swap
+                if(plr.getInventory().getChestplate() == null) {
+                    return;
+                }
+
+            } else if(itemTypeName.contains("helmet")) {
+                // Don't handle if not armor swap
+                if(plr.getInventory().getHelmet() == null) {
+                    return;
+                }
+            }
+
+            ClanType clan = EventClansPlugin.getClan(plr);
+
+            // Don't handle if clan doesn't have a trim
+            if(!clan.hasTrim()) {
+                return;
+            }
+
+            ArmorMeta meta = (ArmorMeta) item.getItemMeta();
+            meta.setTrim(clan.getTrim());
+            item.setItemMeta(meta);
         }
+
     }
 }
