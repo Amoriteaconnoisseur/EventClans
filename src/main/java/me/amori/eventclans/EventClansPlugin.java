@@ -58,12 +58,21 @@ public class EventClansPlugin extends JavaPlugin {
         return CLAN_PLAYER_COUNTS.getOrDefault(clan, 0) > CLAN_PLAYER_LIMIT;
     }
 
+    public static int getClanSize(ClanType clan) {
+        return CLAN_PLAYER_COUNTS.getOrDefault(clan, 0);
+    }
+
     @Override
     public void onEnable() {
         INSTANCE = this;
         CLAN_KEY = new NamespacedKey(this, "clan");
 
         CLAN_PLAYER_COUNTS = new EnumMap<>(ClanType.class);
+
+        // Register placeholders
+        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            new Placeholders().register();
+        }
 
         // Register armor equip event for plugin to use
         ArmorEquipEvent.registerListener(this);
