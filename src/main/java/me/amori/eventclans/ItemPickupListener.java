@@ -28,7 +28,7 @@ public class ItemPickupListener implements Listener {
         ItemStack item = event.getItem().getItemStack();
         Material itemType = item.getType();
         String itemTypeName = itemType.name().toLowerCase();
-        if(itemTypeName.contains("chestplate") || itemTypeName.contains("helmet")) {
+        if(itemTypeName.contains("chestplate") || itemTypeName.contains("helmet") || itemTypeName.contains("leggings")) {
 
             ArmorMeta meta = (ArmorMeta) item.getItemMeta();
             meta.setTrim(clanType.getTrim());
