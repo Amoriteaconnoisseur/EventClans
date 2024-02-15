@@ -6,12 +6,12 @@ import org.bukkit.inventory.meta.trim.TrimPattern;
 
 public enum ClanType {
 
-    RED(new ArmorTrim(TrimMaterial.REDSTONE, TrimPattern.SENTRY)),
-    GREEN(new ArmorTrim(TrimMaterial.EMERALD, TrimPattern.COAST)),
-    BLUE(new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.WAYFINDER)),
+    RED("&c&l%player%", new ArmorTrim(TrimMaterial.REDSTONE, TrimPattern.SENTRY)),
+    GREEN("&a&l%player%", new ArmorTrim(TrimMaterial.EMERALD, TrimPattern.COAST)),
+    BLUE("&b&l%player%", new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.WAYFINDER)),
     //NEUTRAL(new ArmorTrim(TrimMaterial.GOLD, TrimPattern.DUNE), null),
 
-    ADMIN(null)
+    ADMIN("&f&l&kI&f&l%player%&f&k&lI", null)
 
     ;
 
@@ -26,9 +26,16 @@ public enum ClanType {
         }
     }
 
+    private final String coloredName;
     private final ArmorTrim trim;
-    ClanType(ArmorTrim trim) {
+
+    ClanType(String coloredName, ArmorTrim trim) {
+        this.coloredName = coloredName;
         this.trim = trim;
+    }
+
+    public String getColoredName() {
+        return coloredName;
     }
 
     public ArmorTrim getTrim() {

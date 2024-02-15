@@ -63,6 +63,11 @@ public class ArmorEquipListener implements Listener {
                 if(plr.getInventory().getHelmet() == null) {
                     return;
                 }
+            } else if(itemTypeName.contains("leggings")) {
+                // Don't handle if not armor swap
+                if (plr.getInventory().getLeggings() == null) {
+                    return;
+                }
             }
 
             ClanType clan = EventClansPlugin.getClan(plr);

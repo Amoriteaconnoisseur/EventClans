@@ -51,11 +51,11 @@ public class EventClansPlugin extends JavaPlugin {
 
     public static boolean isTrimmableArmorPiece(Material material) {
         String matName = material.name().toLowerCase();
-        return matName.contains("helmet") || matName.contains("chestplate");
+        return matName.contains("helmet") || matName.contains("chestplate") || matName.contains("leggings");
     }
 
     public static boolean isClanFull(ClanType clan) {
-        return CLAN_PLAYER_COUNTS.getOrDefault(clan, 0) > CLAN_PLAYER_LIMIT;
+        return CLAN_PLAYER_COUNTS.getOrDefault(clan, 0) >= CLAN_PLAYER_LIMIT;
     }
 
     public static int getClanSize(ClanType clan) {
@@ -72,6 +72,7 @@ public class EventClansPlugin extends JavaPlugin {
         // Register placeholders
         if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new Placeholders().register();
+            getLogger().log(Level.INFO, "PlaceholderAPI placeholders registered");
         }
 
         // Register armor equip event for plugin to use

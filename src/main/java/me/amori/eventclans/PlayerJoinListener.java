@@ -17,11 +17,15 @@ public class PlayerJoinListener implements Listener {
         // If the player does not have an auto assigned clan it will run the following below
         ClanType clanType = EventClansPlugin.getClan(plr);
         if(clanType == null) {
-            // Selecting the random clan type for the player
             ClanType[] clanTypes = ClanType.values();
             Random random = new Random();
-            int selected = random.nextInt(ClanType.MAIN_CLANS);
-            clanType = clanTypes[selected];
+
+            // Select clan with available slots
+            while(clanType == null || EventClansPlugin.isClanFull(clanType)) {
+                // Selecting the random clan type for the player
+                int selected = random.nextInt(ClanType.MAIN_CLANS);
+                clanType = clanTypes[selected];
+            }
 
             // Saving the Clan Type to the player
             EventClansPlugin.setClan(plr, clanType);

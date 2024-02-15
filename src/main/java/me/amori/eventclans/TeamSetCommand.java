@@ -21,7 +21,7 @@ public class TeamSetCommand implements CommandExecutor {
 
         // Require player to be online
         Player plr = Bukkit.getPlayer(args[0]);
-        if(!plr.isOnline()) {
+        if(plr == null || !plr.isOnline()) {
             sender.sendMessage("Player " + args[0] + " is not online!");
             return false;
         }
