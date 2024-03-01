@@ -14,7 +14,7 @@ import java.util.logging.Level;
 
 public class EventClansPlugin extends JavaPlugin {
 
-    public static final int CLAN_PLAYER_LIMIT = 33;
+    public static final int CLAN_PLAYER_LIMIT = 34;
 
     public static EnumMap<ClanType, Integer> CLAN_PLAYER_COUNTS;
 
@@ -83,7 +83,7 @@ public class EventClansPlugin extends JavaPlugin {
         //getCommand("team").setExecutor(new ClanPanelCommand());
 
         // Register listeners
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new ArmorEquipListener(), this);
         //Bukkit.getPluginManager().registerEvents(new PotionEffectListener(), this);
         //Bukkit.getPluginManager().registerEvents(new ItemPickupListener(), this);

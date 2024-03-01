@@ -6,9 +6,9 @@ import org.bukkit.inventory.meta.trim.TrimPattern;
 
 public enum ClanType {
 
-    RED("&c&l%player%", new ArmorTrim(TrimMaterial.REDSTONE, TrimPattern.SENTRY)),
-    GREEN("&a&l%player%", new ArmorTrim(TrimMaterial.EMERALD, TrimPattern.COAST)),
-    BLUE("&b&l%player%", new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.WAYFINDER)),
+    RED("&c&l%player%", new ArmorTrim(TrimMaterial.REDSTONE, TrimPattern.SILENCE)),
+    GREEN("&a&l%player%", new ArmorTrim(TrimMaterial.EMERALD, TrimPattern.EYE)),
+    BLUE("&b&l%player%", new ArmorTrim(TrimMaterial.DIAMOND, TrimPattern.DUNE)),
     //NEUTRAL(new ArmorTrim(TrimMaterial.GOLD, TrimPattern.DUNE), null),
 
     ADMIN("&f&l&kI&f&l%player%&f&k&lI", null)

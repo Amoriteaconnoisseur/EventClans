@@ -28,15 +28,12 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer plr, @NotNull String params) {
-        if(!plr.isOnline()) {
-            return null;
-        }
-
         return switch (params.toLowerCase()) {
             case "clan_red_count"   -> String.valueOf(EventClansPlugin.getClanSize(ClanType.RED));
             case "clan_blue_count"  -> String.valueOf(EventClansPlugin.getClanSize(ClanType.BLUE));
             case "clan_green_count" -> String.valueOf(EventClansPlugin.getClanSize(ClanType.GREEN));
-            case "clan_current"     -> EventClansPlugin.getClan(plr.getPlayer()).getColoredName();
+            case "clan_current"     -> plr != null && plr.isOnline() ? EventClansPlugin.getClan(plr.getPlayer()).getColoredName() : null;
+            case "player_line"      -> plr != null && plr.isOnline() ? "-".repeat(Math.max(6, plr.getName().length())) : null;
             default -> null;
         };
     }
